@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MyAirtel.iml" filepath="$PROJECT_DIR$/.idea/modules/MyAirtel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MyAirtel_main.iml" filepath="$PROJECT_DIR$/.idea/modules/MyAirtel_main.iml" group="MyAirtel" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MyAirtel_test.iml" filepath="$PROJECT_DIR$/.idea/modules/MyAirtel_test.iml" group="MyAirtel" />
+    </modules>
+  </component>
+</project>
