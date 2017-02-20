@@ -12,6 +12,6 @@ import tests.onboarding.OtpRegistration;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
        OtpRegistration.class,
-        DataRegistration.class
+        //DataRegistration.class
 })
     public class TestPrimer {}

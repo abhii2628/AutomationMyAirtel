@@ -12,7 +12,7 @@ import org.openqa.selenium.NoSuchElementException;
 public class Onboarding {
 
     public OnboardingUiObjects uiobject = new OnboardingUiObjects();
-    private static MyAirtelapp myairtelapp = AndroidInit.app.myAirtelapp;
+
 
     public void tapDenyPermission(){
         try{
@@ -32,10 +32,10 @@ public class Onboarding {
 
     public void tapAllowPermission(){
         try{
-            MyLogger.log.info("Tapping deny on the Phone permission popup.");
-            uiobject.allowPermission().tap();
+            MyLogger.log.info("Tapping allow on the Phone permission popup.");
+            uiobject.allowPermission().waitToAppear(30).tap();
 
-            if (uiobject.denyPermission().exists()){
+            if (uiobject.allowPermission().exists()){
                 MyLogger.log.info("Element not focused, hence clicking on it again");
                 uiobject.allowPermission().tap();
             }
@@ -50,15 +50,6 @@ public class Onboarding {
         try{
             MyLogger.log.info("Tapping on the text field for Enter Mobile number.");
             uiobject.enterNumber().tap();
-        }catch (NoSuchElementException e){
-            throw new AssertionError("Failed to tap on the element, as element was not visible or blocked.");
-        }
-    }
-
-    public void enterMobileNumber(){
-        try{
-            MyLogger.log.info("Entering the Mobile number for onboarding");
-            uiobject.enterNumber().typeText("7042127666");
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap on the element, as element was not visible or blocked.");
         }
@@ -94,8 +85,10 @@ public class Onboarding {
 
     public void tapSkipReferal(){
             MyLogger.log.info("Tapping on the skip referal screen");
-            if (uiobject.skipReferal().exists()){
-                uiobject.skipReferal().waitToAppear(60).tap();
+
+            if (uiobject.skipReferal().waitToAppear(20).exists()){
+                MyLogger.log.info("User is a new number, tap on the Skip button");
+                uiobject.skipReferal().tap();
             }
             else {
                 MyLogger.log.info("Number not a new user / whitelisted number, continue the flow");
@@ -224,15 +217,15 @@ public class Onboarding {
     public void otpRegistration() throws InterruptedException {
         try{
             MyLogger.log.info("OTP registration flow");
-            myairtelapp.onboarding.tapDenyPermission();
-            myairtelapp.onboarding.enterMobileNumber();
-            myairtelapp.onboarding.tapRequestOtp();
-            myairtelapp.onboarding.tapDenyPermission();
+            tapDenyPermission();
+            //enterMobileNumber();
+            tapRequestOtp();
+            tapDenyPermission();
             Thread.sleep(5000);
-            myairtelapp.onboarding.enterOtpManually();
-            myairtelapp.onboarding.tapSkipReferal();
-            myairtelapp.onboarding.denyAlways();
-            myairtelapp.onboarding.tapDenyPermission();
+            enterOtpManually();
+            tapSkipReferal();
+            denyAlways();
+            tapDenyPermission();
         }catch (NoSuchElementException e){
             throw new AssertionError("Failed to tap on the element, as element was not visible or blocked.");
         }

@@ -107,7 +107,7 @@ public class DriverManager {
        if (AndroidInit.driver != null) {
            MyLogger.log.info("Killing the AndroidInit driver");
            AndroidInit.driver.quit();
-           AndroidInit.adb.uninstallApp(unlockPackage);
+         //  AndroidInit.adb.uninstallApp(unlockPackage);
 //            service.stop(); Fix this once node JS path is set
         } else MyLogger.log.info("AndroidInit driver is not initialized!");
     }

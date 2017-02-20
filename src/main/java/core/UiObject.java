@@ -173,7 +173,7 @@ public class UiObject {
     }
 
     public UiObject tap() {
-        waitToAppear(10000);
+        waitToAppear(3);
         if (isxPath()) AndroidInit.driver.findElementByXPath(locator).click();
         else AndroidInit.driver.findElementByAndroidUIAutomator(locator).click();
         return this;

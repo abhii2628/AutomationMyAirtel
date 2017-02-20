@@ -11,13 +11,6 @@ public class WifiOnboardingTest {
     public static void otpRegistration() throws InterruptedException {
         MyAirtelapp myairtelapp = AndroidInit.app.myAirtelapp;
         myairtelapp.open();
-//        AndroidInit.app.myairtelapp.onboarding.tapDenyPermission();
-//        AndroidInit.app.myairtelapp.onboarding.enterMobileNumber();
-//        AndroidInit.app.myairtelapp.onboarding.tapRequestOtp();
-//        AndroidInit.app.myairtelapp.onboarding.tapDenyPermission();
-//       Thread.sleep(5000);
-//       AndroidInit.app.myairtelapp.onboarding.enterOtpManually();
-//       AndroidInit.app.myairtelapp.onboarding.tapSkipReferal();
         myairtelapp.onboarding.denyAlways();
         myairtelapp.onboarding.tapDenyPermission();
         myairtelapp.onboarding.checkAccountCard();
