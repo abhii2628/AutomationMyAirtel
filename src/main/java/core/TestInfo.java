@@ -1,7 +1,5 @@
 package core;
 
-import javax.print.attribute.standard.MediaSize;
-
 /**
  * Created by B0095770 on 17/01/17.
  */

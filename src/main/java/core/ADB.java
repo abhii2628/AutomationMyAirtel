@@ -1,8 +1,6 @@
 package core;
 
-import com.gargoylesoftware.htmlunit.util.StringUtils;
 import core.managers.ServerManager;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,8 +48,9 @@ public class ADB {
     }
 
     public String getAndroidVersionAsString (){
-        String output = command("adb -s " +ID + " shell getprop ro.build.version.release ");
-        if(output.length() == 3) output+=".0";
+        String output = command("adb -s " +ID+ " shell getprop ro.build.version.release");
+        //if(output.length() == 3) output+=".0";
+        MyLogger.log.info("Running on android "+output);
         return output;
     }
 
@@ -136,7 +135,7 @@ public class ADB {
     }
 
     public void dataEnable(){
-        command("adb -s "+ID+" shell svc data disable");
+        command("adb -s "+ID+" shell svc data enable");
     }
 
     public void dataDisable(){

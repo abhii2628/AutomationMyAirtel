@@ -15,7 +15,6 @@ public class UiObject {
 
     UiObject(String locator) {
         this.locator = locator;
-        MyLogger.log.info("Created new UI Object with: " + this.locator);
     }
 
     private boolean isxPath() {
@@ -222,6 +221,7 @@ public class UiObject {
             throw new AssertionError("Element " + locator + " did not disappear in " + seconds + "seconds");
         return this;
     }
+
 }
 
 

@@ -46,6 +46,11 @@ public class OnboardingUiObjects {
         return telephonyPermission;
     }
 
+    public UiObject permissopnPopup (){
+        if (permissionPopup == null) permissionPopup = new UiSelector().resourceId("com.android.packageinstaller:id/dialog_container").makeUiObject();
+        return permissionPopup;
+    }
+
     public UiObject heading (){
         if (heading == null) heading = new UiSelector().resourceId("com.myairtelapp.debug:id/tv_heading").makeUiObject();
         return heading;
@@ -76,11 +81,6 @@ public class OnboardingUiObjects {
         return smsPermission;
     }
 
-    public UiObject focusPermission (){
-        if (allowPermission == null) allowPermission = new UiSelector().resourceId("com.ui.android.packageinstaller:id/permission_message").makeUiObject();
-        return allowPermission;
-    }
-
     public UiObject denyPermission (){
         if (denyPermission == null) denyPermission = new UiSelector().textContains("Deny").makeUiObject();
         return denyPermission;
@@ -97,7 +97,7 @@ public class OnboardingUiObjects {
     }
 
     public UiObject inputOtp (){
-        if (inputOtp == null) inputOtp = new UiSelector().resourceId("com.myairtelapp.debug:id/rl_input_otp").makeUiObject();
+        if (inputOtp == null) inputOtp = new UiSelector().resourceId("com.myairtelapp.debug:id/mpin_box_container").makeUiObject();
         return inputOtp;
     }
 
@@ -127,7 +127,7 @@ public class OnboardingUiObjects {
     }
 
     public UiObject myAirtelTab(){
-        if (myAirtelTab == null) myAirtelTab = new UiSelector().resourceId("myAirtelTab").makeUiObject();
+        if (myAirtelTab == null) myAirtelTab = new UiSelector().text("MY AIRTEL").makeUiObject();
         return myAirtelTab;
     }
 
@@ -161,13 +161,13 @@ public class OnboardingUiObjects {
         return morePlans;
     }
 
-
-    //ui objects to go to Payments Flow Banking.
-
     public UiObject payNow(){
         if (payNow == null) payNow = new UiSelector().resourceId("com.myairtelapp.debug:id/btn_card_footer").makeUiObject();
         return payNow;
     }
+
+    //ui objects to go to Payments Flow Banking.
+
 
     public UiObject enterAmount(){
         if (enterAmount == null) enterAmount = new UiSelector().text("9").makeUiObject();
@@ -190,7 +190,7 @@ public class OnboardingUiObjects {
     }
 
     public UiObject payText(){
-        if (paytext == null) paytext = new UiSelector().xpath("ui.android.view.ViewGroup[contains(@resource-id,'top_toolbar')and @text='Payment']").makeUiObject();
+        if (paytext == null) paytext = new UiSelector().xpath("//ui.android.view.ViewGroup[contains(@resource-id,'top_toolbar')and @text='Payment']").makeUiObject();
         return paytext;
     }
 

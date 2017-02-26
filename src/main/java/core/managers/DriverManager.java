@@ -30,17 +30,21 @@ public class DriverManager {
     private static String unlockPackage = "io.appium.unlock";
 
     private static DesiredCapabilities getCapabilities(String deviceID) {
+        AndroidInit.adb = new ADB(deviceID);
+
         File classpathRoot = new File(System.getProperty("user.dir"));
         File appDir = new File(classpathRoot, "src/resources");
         File app = null;
-        app = new File(appDir, "TestCloud.apk");
+        app = new File(appDir, "Test1.apk");
 
         MyLogger.log.info("Creating desired capabilities for " + deviceID);
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("deviceName", deviceID);
         caps.setCapability("platformName", "Android");
-        caps.setCapability("noReset",false);
-        caps.setCapability("fullReset",true);
+        caps.setCapability("noReset", false);
+        caps.setCapability("platformVersion", AndroidInit.adb.getAndroidVersionAsString());
+        caps.setCapability("autoLaunch", true);
+        caps.setCapability("fullReset", true);
 
         caps.setCapability("app", app.getAbsolutePath());
         MyLogger.log.info("Created " + caps + " capabilities for the devices");
@@ -50,7 +54,7 @@ public class DriverManager {
     private static URL host(String deviceID) throws MalformedURLException {
         if (hosts == null) {
             hosts = new HashMap<String, URL>();
-            hosts.put("emulator-5554", new URL("http://0.0.0.0:4723/wd/hub"));
+            hosts.put("5203e468fadc4341", new URL("http://0.0.0.0:4723/wd/hub"));
             //Multiple device support and multiple port too
             //hosts.put("5203e468fadc4341", new URL("http://0.0.0.0:4723/wd/hub"));
         }
@@ -104,10 +108,10 @@ public class DriverManager {
     }
 
     public static void killDriver() {
-       if (AndroidInit.driver != null) {
-           MyLogger.log.info("Killing the AndroidInit driver");
-           AndroidInit.driver.quit();
-         //  AndroidInit.adb.uninstallApp(unlockPackage);
+        if (AndroidInit.driver != null) {
+            MyLogger.log.info("Killing the AndroidInit driver");
+            AndroidInit.driver.quit();
+            //  AndroidInit.adb.uninstallApp(unlockPackage);
 //            service.stop(); Fix this once node JS path is set
         } else MyLogger.log.info("AndroidInit driver is not initialized!");
     }
