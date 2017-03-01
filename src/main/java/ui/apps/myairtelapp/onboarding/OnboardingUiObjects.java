@@ -38,7 +38,10 @@ public class OnboardingUiObjects {
             enterAmount,
             pack,
             ok,
-            axisBank,headerText,paytext,denyAlways,manageAccount,accountBalance,
+            axisBank,
+            messageRead,
+            notification,
+            headerText,paytext,denyAlways,manageAccount,accountBalance,
             rechargeNow;
 
     public UiObject telephonyPermission (){
@@ -164,6 +167,16 @@ public class OnboardingUiObjects {
     public UiObject payNow(){
         if (payNow == null) payNow = new UiSelector().resourceId("com.myairtelapp.debug:id/btn_card_footer").makeUiObject();
         return payNow;
+    }
+
+    public UiObject messageRead(){
+        if (messageRead == null) messageRead = new UiSelector().resourceId("com.android.mms:id/from").textContains("AD-AIRAPP").makeUiObject();
+        return messageRead;
+    }
+
+    public UiObject notification(){
+        if (notification == null) notification = new UiSelector().resourceId("android:id/inbox_text0").textContains("AD-AIRAPP").makeUiObject();
+        return notification;
     }
 
     //ui objects to go to Payments Flow Banking.

@@ -1,14 +1,18 @@
 package tests.onboarding;
 
-import core.SkipTest;
-import ui.android.AndroidInit;
-import ui.apps.myairtelapp.MyAirtelapp;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import core.MyLogger;
+import core.SkipTest;
 import core.constants.Credentials;
 import core.managers.TestManager;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import ui.android.AndroidInit;
+import ui.apps.myairtelapp.MyAirtelapp;
+import ui.apps.myairtelapp.utils.UtilDriver;
 
 /**
  * Created by B0095770 on 25/01/17.
@@ -18,11 +22,9 @@ public class OtpRegistration extends TestManager {
     private static MyAirtelapp myairtelapp = AndroidInit.app.myAirtelapp;
 
     @BeforeClass
-
     public static void beforeClass() throws InterruptedException {
         String network = AndroidInit.driver.getConnection().name();
         MyLogger.log.info("Running on " + network);
-
         if (network.equals("DATA")) {
             MyLogger.log.info("User is running on the " + network + " connection");
             AndroidInit.adb.wifiDisable();
@@ -44,6 +46,7 @@ public class OtpRegistration extends TestManager {
 //        else MyLogger.log.info("Permission popup for always not available, continue with app reg");
 //    }
 
+
     @Test
     public void test001() {
         testInfo.id("test001").name("Tap deny on the permission popup for telephony");
@@ -63,7 +66,6 @@ public class OtpRegistration extends TestManager {
 
     @Test
     public void test003() {
-        testInfo.id("test003").name("Enter mobile number for onboarding");
         Assert.assertTrue(myairtelapp.onboarding.uiobject.enterNumber().exists());
         Assert.assertTrue(myairtelapp.onboarding.uiobject.enterNumber().isClickable());
         myairtelapp.onboarding.uiobject.enterNumber().waitToAppear(15).tap();
@@ -84,16 +86,22 @@ public class OtpRegistration extends TestManager {
     }
 
     @Test
-    public void test006() {
-        testInfo.id("test006").name("Check all the text present on the OTP verification screen");
+    public void test006() throws InterruptedException {
+       // SkipTest.UNLESS(AndroidInit.adb.getAndroidVersionAsString().equals("6.0"));
+        UtilDriver.readMsgs();
+    }
+
+    @Test
+    public void test007() {
+        testInfo.id("test007").name("Check all the text present on the OTP verification screen");
         myairtelapp.onboarding.uiobject.heading().waitToAppear(30);
         Assert.assertEquals("Please enter the OTP sent to", myairtelapp.onboarding.uiobject.heading().getText());
         Assert.assertTrue(myairtelapp.onboarding.uiobject.editNumber().exists());
     }
 
     @Test
-    public void test007() {
-        testInfo.id("test007").name("Enter the OTP for white listed number");
+    public void test008() {
+        testInfo.id("test008").name("Enter the OTP for white listed number");
         myairtelapp.onboarding.uiobject.numpad().waitToAppear(15).tap();
         myairtelapp.onboarding.uiobject.numpad().tap();
         myairtelapp.onboarding.uiobject.numpad().tap();
@@ -101,15 +109,15 @@ public class OtpRegistration extends TestManager {
     }
 
     @Test
-    public void test008() {
-        SkipTest.UNLESS(myairtelapp.onboarding.uiobject.skipReferal().waitToAppear(20).exists());
-        testInfo.id("test008").name("Check if the referral screen comes and tap on Skip");
+    public void test009() {
+        SkipTest.UNLESS(myairtelapp.onboarding.uiobject.skipReferal().waitToAppear(10).exists());
+        testInfo.id("test009").name("Check if the referral screen comes and tap on Skip");
         myairtelapp.onboarding.tapSkipReferal();
     }
 
     @Test
-    public void test009() {
-        testInfo.id("test009").name("Check if the permission popup for contacts comes");
+    public void test010() {
+        testInfo.id("test010").name("Check if the permission popup for contacts comes");
         Assert.assertTrue(myairtelapp.onboarding.uiobject.denyPermission().waitToAppear(60).exists());
         myairtelapp.onboarding.tapDenyPermission();
     }
@@ -124,6 +132,7 @@ public class OtpRegistration extends TestManager {
 
     @Test
     public void test012() {
+        SkipTest.UNLESS(myairtelapp.onboarding.uiobject.payNow().exists());
         testInfo.id("test012").name("Check if the logged number is prepaid or postpaid");
         Assert.assertEquals("PAY NOW", myairtelapp.onboarding.uiobject.payNow().waitToAppear(60).getText());
         MyLogger.log.info("The logged in number is postpaid.");
@@ -131,10 +140,19 @@ public class OtpRegistration extends TestManager {
 
     @Test
     public void test013() {
-        testInfo.id("013").name("Check the main account card elements for postpaid");
+        SkipTest.UNLESS(myairtelapp.onboarding.uiobject.morePlans().exists());
+        testInfo.id("test013").name("Check if the logged number is prepaid or postpaid");
+        Assert.assertEquals("PAY NOW", myairtelapp.onboarding.uiobject.morePlans().waitToAppear(60).getText());
+        MyLogger.log.info("The logged in number is postpaid.");
+    }
+
+    @Test
+    public void test014() {
+        testInfo.id("014").name("Check the main account card elements for postpaid");
         Assert.assertEquals("Me", myairtelapp.onboarding.uiobject.mainAccountHeader().getText());
         Assert.assertNotNull(myairtelapp.onboarding.uiobject.mainAccountNumber().getText());
         Assert.assertTrue(myairtelapp.onboarding.uiobject.mainAccountProfileImage().exists());
         MyLogger.log.info("Check the UI elements of the main account card");
     }
+
 }

@@ -11,12 +11,10 @@ public class Onboarding {
 
     public OnboardingUiObjects uiobject = new OnboardingUiObjects();
 
-
     public void tapDenyPermission() {
         try {
             MyLogger.log.info("Tapping deny on the Phone permission popup.");
             uiobject.denyPermission().tap();
-
             if (uiobject.denyPermission().exists()) {
                 MyLogger.log.info("Element not focused, hence clicking on it again");
                 uiobject.denyPermission().tap();
