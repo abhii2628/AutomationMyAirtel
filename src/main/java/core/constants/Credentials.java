@@ -6,7 +6,8 @@ package core.constants;
 public class Credentials {
 
     public static String
-            postpaidNumber = "7042127666",
+           // postpaidNumber = "7042127666",
+            postpaidNumber = "8527180876",
             prepaidNumber = "9599822187";
 
 // Build varaint

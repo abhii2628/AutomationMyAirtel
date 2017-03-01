@@ -12,8 +12,8 @@ import ui.apps.myairtelapp.postpaidPayment.PostPaidPayment;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
        OtpRegistration.class,
-      // DataRegistration.class,
-        PostPaidPayment.class
+      //DataRegistration.class,
+        //PostPaidPayment.class
         //Sample.class
 })
     public class TestPrimer {}
