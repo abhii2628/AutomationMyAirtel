@@ -63,9 +63,7 @@ public class Onboarding {
         if (uiobject.skipReferal().waitToAppear(10).exists()) {
             MyLogger.log.info("User is a new number, tap on the Skip button");
             uiobject.skipReferal().tap();
-        } else if (uiobject.denyPermission().exists()) {
-            MyLogger.log.info("Number not a new user / whitelisted number, continue with the flow");
-        }
+        } else MyLogger.log.info("Not a new user, continuing with registration flow");
     }
 
 

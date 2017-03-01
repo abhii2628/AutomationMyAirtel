@@ -185,5 +185,9 @@ public class ADB {
         command("adb -s "+ID+" shell kill"+PID);
     }
 
+    public String getDeviceManufacturer(){
+        return command("adb -s "+ID+" shell getprop ro.product.manufacturer");
+    }
+
 
 }
