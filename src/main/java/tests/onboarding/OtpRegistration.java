@@ -86,27 +86,26 @@ public class OtpRegistration extends TestManager {
     }
 
     @Test
-    public void test006() throws InterruptedException {
-       // SkipTest.UNLESS(AndroidInit.adb.getAndroidVersionAsString().equals("6.0"));
-        UtilDriver.readMsgs();
-    }
-
-    @Test
-    public void test007() {
-        testInfo.id("test007").name("Check all the text present on the OTP verification screen");
-        myairtelapp.onboarding.uiobject.heading().waitToAppear(30);
-        Assert.assertEquals("Please enter the OTP sent to", myairtelapp.onboarding.uiobject.heading().getText());
+    public void test006() {
+        testInfo.id("test006").name("Check all the text present on the OTP verification screen");
+        Assert.assertEquals("Please enter the OTP sent to", myairtelapp.onboarding.uiobject.heading().waitToAppear(30).getText());
         Assert.assertTrue(myairtelapp.onboarding.uiobject.editNumber().exists());
     }
 
     @Test
+    public void test007() throws InterruptedException {
+       // SkipTest.UNLESS(AndroidInit.adb.getAndroidVersionAsString().equals("6.0"));
+        UtilDriver.readMsgs();
+    }
+
+  /*  @Test
     public void test008() {
         testInfo.id("test008").name("Enter the OTP for white listed number");
         myairtelapp.onboarding.uiobject.numpad().waitToAppear(15).tap();
         myairtelapp.onboarding.uiobject.numpad().tap();
         myairtelapp.onboarding.uiobject.numpad().tap();
         myairtelapp.onboarding.uiobject.numpad().tap();
-    }
+    }*/
 
     @Test
     public void test009() {
