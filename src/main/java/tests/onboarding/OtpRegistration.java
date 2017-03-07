@@ -69,7 +69,7 @@ public class OtpRegistration extends TestManager {
         Assert.assertTrue(myairtelapp.onboarding.uiobject.enterNumber().exists());
         Assert.assertTrue(myairtelapp.onboarding.uiobject.enterNumber().isClickable());
         myairtelapp.onboarding.uiobject.enterNumber().waitToAppear(15).tap();
-        myairtelapp.onboarding.uiobject.enterNumber().typeText(Credentials.postpaidNumber);
+        myairtelapp.onboarding.uiobject.enterNumber().typeText(Credentials.prepaidNumber);
     }
 
     @Test

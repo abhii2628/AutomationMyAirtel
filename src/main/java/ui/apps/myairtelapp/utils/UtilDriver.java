@@ -2,10 +2,16 @@ package ui.apps.myairtelapp.utils;
 
 import core.MyLogger;
 import core.UiObject;
+import io.appium.java_client.android.AndroidDriver;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import ui.android.AndroidInit;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,6 +34,7 @@ public class UtilDriver {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         List<WebElement> msg = AndroidInit.driver.findElements(By.id("com.android.mms:id/list_item_container"));
         String pop = msg.get(msg.size() - 1).findElement(By.id("com.android.mms:id/list_item_text_view")).getText();
         String numberOnly = pop.replaceAll("[^0-9]", "");
@@ -36,12 +43,28 @@ public class UtilDriver {
 
         AndroidInit.driver.navigate().back();
         AndroidInit.driver.navigate().back();
-        //AndroidInit.app.myAirtelapp.onboarding.uiobject.inputOtp().typeText(otp);
 
         // Typing the OTP in the numpad.
-        AndroidInit.app.myAirtelapp.onboarding.uiobject.numpad().waitToAppear(3000).tapString((otp.substring(0)));
-        AndroidInit.app.myAirtelapp.onboarding.uiobject.numpad().tapString((otp.substring(1)));
-        AndroidInit.app.myAirtelapp.onboarding.uiobject.numpad().tapString((otp.substring(2)));
-        AndroidInit.app.myAirtelapp.onboarding.uiobject.numpad().tapString((otp.substring(3)));
+        List<WebElement> abc = AndroidInit.driver.findElements(By.id("com.myairtelapp.debug:id/tv_numpad"));
+        for (int i = 0; i < 10; i++) {
+            MyLogger.log.info("The printed blah blah is " + abc.get(i).getText());
+            for (int j = 0; j < 4; j++) {
+                if (abc.get(i).getText().equals(otp.substring(j))) {
+                    MyLogger.log.info("Typing on the " + otp.substring(j));
+                    abc.get(i).click();
+                }
+            }
+        }
+    }
+
+    public static String CaptureScreen(AndroidDriver driver, String ImagesPath)
+    {
+        TakesScreenshot oScn = (TakesScreenshot) driver;
+        File oScnShot = oScn.getScreenshotAs(OutputType.FILE);
+        File oDest = new File(ImagesPath+".jpg");
+        try {
+            FileUtils.copyFile(oScnShot, oDest);
+        } catch (IOException e) {MyLogger.log.info(e.getMessage());}
+        return ImagesPath+".jpg";
     }
 }
